@@ -129,26 +129,72 @@ export class ExerciseLibraryService {
   /**
    * Create custom exercise
    */
-  static async createCustomExercise(exercise: Omit<Exercise, 'id' | 'isCustom'>): Promise<Exercise> {
+  static async createCustomExercise(exerciseData: Omit<Exercise, 'id'>): Promise<Exercise> {
     try {
-      const customExercise: Exercise = {
-        ...exercise,
-        id: `custom_${Date.now()}`,
-        isCustom: true,
+      // Generate unique ID for custom exercise
+      const customId = `custom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      const newExercise: Exercise = {
+        ...exerciseData,
+        id: customId,
+        isCustom: true
       };
+
+      // Validate exercise data
+      this.validateExerciseData(newExercise);
+
+      // Get existing custom exercises
+      const customExercises = await this.getAllExercises();
       
-      const customExercises = await StorageManager.getItem<Exercise[]>('customExercises') || [];
-      const updatedExercises = [...customExercises, customExercise];
-      
-      await StorageManager.setItem('customExercises', updatedExercises);
-      
-      // Clear cache to reload with new exercise
+      // Check for duplicate names
+      const existingNames = customExercises.map(ex => ex.name.toLowerCase());
+      if (existingNames.includes(newExercise.name.toLowerCase())) {
+        throw new Error('An exercise with this name already exists');
+      }
+
+      // Add to custom exercises list
+      const updatedCustomExercises = [...customExercises, newExercise];
+      await StorageManager.setItem('customExercises', updatedCustomExercises);
+
+      // Update cache
       this.exerciseCache = null;
-      
-      return customExercise;
+
+      return newExercise;
     } catch (error) {
-      console.error('Error creating custom exercise:', error);
+      console.error('Failed to create custom exercise:', error);
       throw error;
+    }
+  }
+
+  private validateExerciseData(exercise: Exercise): void {
+    if (!exercise.name || exercise.name.trim().length < 3) {
+      throw new Error('Exercise name must be at least 3 characters long');
+    }
+
+    if (!exercise.description || exercise.description.trim().length < 10) {
+      throw new Error('Exercise description must be at least 10 characters long');
+    }
+
+    if (!exercise.muscleGroups || exercise.muscleGroups.length === 0) {
+      throw new Error('At least one muscle group must be specified');
+    }
+
+    if (!exercise.equipment || exercise.equipment.length === 0) {
+      throw new Error('At least one equipment type must be specified');
+    }
+
+    if (!exercise.instructions || exercise.instructions.length === 0) {
+      throw new Error('At least one instruction step must be provided');
+    }
+
+    const validCategories = ['push', 'pull', 'legs', 'core', 'cardio'];
+    if (!validCategories.includes(exercise.category)) {
+      throw new Error('Invalid exercise category');
+    }
+
+    const validDifficulties = ['beginner', 'intermediate', 'advanced'];
+    if (!validDifficulties.includes(exercise.difficulty)) {
+      throw new Error('Invalid difficulty level');
     }
   }
 

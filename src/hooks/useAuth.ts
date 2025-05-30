@@ -4,17 +4,13 @@ import { SupabaseService } from '../services/supabaseService';
 import { NavigationService } from '../services/navigationService';
 import { useCallback, useEffect } from 'react';
 
-export interface SignInCredentials {
-  email: string;
-  password: string;
-}
-
 export interface SignUpCredentials {
-  email: string;
-  password: string;
-  firstName?: string;
-  lastName?: string;
-}
+    email: string;
+    password: string;
+    displayName?: string;
+    firstName?: string;
+    lastName?: string;
+  }
 
 export const useAuth = () => {
   const dispatch = useAppDispatch();
@@ -93,7 +89,7 @@ export const useAuth = () => {
     NavigationService.navigateToAuth();
   };
 
-  const signIn = useCallback(async (credentials: SignInCredentials): Promise<boolean> => {
+  const signIn = useCallback(async (credentials: SignUpCredentials): Promise<boolean> => {
     try {
       dispatch(setLoading(true));
       dispatch(setError(null));

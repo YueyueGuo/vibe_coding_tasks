@@ -19,7 +19,7 @@ export const ExerciseLibraryScreen: React.FC = () => {
       <View style={styles.content}>
         <Input 
           placeholder="Search exercises..."
-          style={styles.searchInput}
+          // style={styles.searchInput}
         />
 
         <Card style={styles.categoriesCard}>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { WelcomeStep } from './WelcomeStep';
-import { GoalsSelectionStep } from './GoalsSelectionStep';
+import GoalsSelectionStep from './GoalsSelectionStep';
 import { ExperienceLevelStep } from './ExperienceLevelStep';
 import { PreferencesStep } from './PreferencesStep';
 import { CompletionStep } from './CompletionStep';

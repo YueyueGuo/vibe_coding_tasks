@@ -17,6 +17,7 @@ import { theme } from '../../styles/theme';
 import { Button } from '../common/Button';
 import { useCelebration } from '../../hooks/useCelebration';
 import WorkoutStatsService, { WorkoutStats } from '../../services/workoutStatsService';
+import { ExerciseLibraryService } from '../../services/exerciseLibraryService';
 
 interface WorkoutSummaryScreenProps {
   route: {
@@ -71,16 +72,13 @@ export const WorkoutSummaryScreen: React.FC<WorkoutSummaryScreenProps> = ({ rout
       // Trigger workout completion celebration
       await triggerWorkoutCompletion({
         duration: workoutStats.duration,
-        totalSets: workoutStats.completedSets,
-        volume: workoutStats.totalVolume
+        totalSets: workoutStats.completedSets
       });
 
       // Trigger PR celebrations
       for (const pr of workoutStats.newPersonalRecords) {
         await triggerPersonalRecord({
           exercise: pr.exercise,
-          type: pr.type,
-          improvement: pr.improvement,
           newRecord: pr.newValue
         });
       }
@@ -187,7 +185,7 @@ export const WorkoutSummaryScreen: React.FC<WorkoutSummaryScreenProps> = ({ rout
     return (
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>🏆 New Personal Records!</Text>
-        {workoutStats.newPersonalRecords.map((pr, index) => (
+        {workoutStats.newPersonalRecords.map((pr: any, index: any) => (
           <View key={index} style={styles.prCard}>
             <View style={styles.prHeader}>
               <Text style={styles.prExercise}>{pr.exercise}</Text>
@@ -208,7 +206,7 @@ export const WorkoutSummaryScreen: React.FC<WorkoutSummaryScreenProps> = ({ rout
     return (
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>📈 Improvements</Text>
-        {workoutStats.improvements.map((improvement, index) => (
+        {workoutStats.improvements.map((improvement: any, index: any) => (
           <View key={index} style={styles.improvementCard}>
             <Text style={styles.improvementExercise}>{improvement.exercise}</Text>
             <Text style={styles.improvementText}>
@@ -319,7 +317,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: theme.colors.textPrimary,
+    color: theme.colors.text,
     textAlign: 'center',
     marginBottom: theme.spacing.sm,
   },
@@ -365,7 +363,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: theme.colors.textPrimary,
+    color: theme.colors.text,
     marginBottom: theme.spacing.lg,
   },
   prCard: {
@@ -385,7 +383,7 @@ const styles = StyleSheet.create({
   prExercise: {
     fontSize: 16,
     fontWeight: '600',
-    color: theme.colors.textPrimary,
+    color: theme.colors.text,
     flex: 1,
   },
   prBadge: {
@@ -411,7 +409,7 @@ const styles = StyleSheet.create({
   improvementExercise: {
     fontSize: 14,
     fontWeight: '600',
-    color: theme.colors.textPrimary,
+    color: theme.colors.text,
     marginBottom: theme.spacing.xs,
   },
   improvementText: {
@@ -438,7 +436,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.borderRadius.md,
     padding: theme.spacing.lg,
     fontSize: 16,
-    color: theme.colors.textPrimary,
+    color: theme.colors.text,
     minHeight: 100,
     borderWidth: 1,
     borderColor: theme.colors.border,

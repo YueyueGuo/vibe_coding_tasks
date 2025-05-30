@@ -6,11 +6,11 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 // Navigation prop types
 export type AuthNavigationProp = NavigationProp<AuthStackParamList>;
 export type MainTabNavigationProp = NavigationProp<MainTabParamList>;
-export type WorkoutStackNavigationProp = NavigationProp<WorkoutStackParamList>;
+export type WorkoutStackNavigationProp = NavigationProp<WorkoutsStackParamList>;
 
 // Route prop types
 export type AuthRouteProp<T extends keyof AuthStackParamList> = RouteProp<AuthStackParamList, T>;
-export type WorkoutStackRouteProp<T extends keyof WorkoutStackParamList> = RouteProp<WorkoutStackParamList, T>;
+export type WorkoutStackRouteProp<T extends keyof WorkoutsStackParamList> = RouteProp<WorkoutsStackParamList, T>;
 
 // Combined navigation types
 export type RootNavigationProp = AuthNavigationProp | MainTabNavigationProp | WorkoutStackNavigationProp;

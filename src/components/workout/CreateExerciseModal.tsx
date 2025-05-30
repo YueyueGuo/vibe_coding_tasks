@@ -100,6 +100,7 @@ export const CreateExerciseModal: React.FC<CreateExerciseModalProps> = ({
         muscleGroups: formData.muscleGroups,
         equipment: formData.equipment.filter(eq => eq.trim()),
         instructions: formData.instructions.filter(inst => inst.trim()),
+        isCustom: true,
       });
 
       HapticService.impact('medium');

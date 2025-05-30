@@ -7,7 +7,7 @@ import { RootState } from '../../stores/store';
 
 export const ProfileHomeScreen: React.FC = () => {
   const { theme, toggleTheme, isDark } = useTheme();
-  const user = useSelector((state: RootState) => state.user.user);
+  const user = useSelector((state: RootState) => state.user.currentUser);
 
   const menuItems = [
     { title: 'Edit Profile', icon: '👤', onPress: () => {} },

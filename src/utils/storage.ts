@@ -1,3 +1,4 @@
+import { WorkoutSession } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface StorageConfig {
@@ -6,6 +7,21 @@ export interface StorageConfig {
 }
 
 class StorageManager {
+  static async getItem<T>(key: string): Promise<T | null> {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key);
+      return jsonValue ? JSON.parse(jsonValue) : null;
+    } catch (error) {
+      console.error(`Error retrieving item ${key}:`, error);
+      return null;
+    }
+  }
+  static setItem<T>(key: string, value: T): Promise<void> {
+      throw new Error('Method not implemented.');
+  }
+  static removeItem(arg0: string) {
+      throw new Error('Method not implemented.');
+  }
   private config: StorageConfig;
 
   constructor(config: StorageConfig) {
@@ -14,16 +30,6 @@ class StorageManager {
 
   private getKey(key: string): string {
     return `${this.config.keyPrefix}_${key}`;
-  }
-
-  async setItem<T>(key: string, value: T): Promise<void> {
-    try {
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem(this.getKey(key), jsonValue);
-    } catch (error) {
-      console.error(`Error storing item ${key}:`, error);
-      throw error;
-    }
   }
 
   async getItem<T>(key: string): Promise<T | null> {

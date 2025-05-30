@@ -75,7 +75,7 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Email</Text>
           <TextInput
-            style={[styles.input, emailError && styles.inputError]}
+            style={[styles.input, emailError ? styles.inputError : undefined]}
             value={email}
             onChangeText={(value) => {
               setEmail(value);
