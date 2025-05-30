@@ -1,0 +1,875 @@
+{
+  "exercises": [
+    {
+      "id": "squat",
+      "name": "Barbell Back Squat",
+      "description": "A compound exercise targeting the quadriceps, glutes, and hamstrings",
+      "muscleGroups": ["quads", "glutes", "hamstrings", "core"],
+      "equipment": ["barbell", "squat_rack"],
+      "category": "legs",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Set up the barbell in a squat rack at about chest height",
+        "Position the bar on your upper traps and step back",
+        "Stand with feet shoulder-width apart, toes slightly turned out",
+        "Lower your body by bending at the hips and knees",
+        "Descend until your thighs are parallel to the floor",
+        "Drive through your heels to return to the starting position"
+      ]
+    },
+    {
+      "id": "deadlift",
+      "name": "Conventional Deadlift",
+      "description": "A compound exercise targeting the posterior chain",
+      "muscleGroups": ["hamstrings", "glutes", "back", "traps", "core"],
+      "equipment": ["barbell"],
+      "category": "pull",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Stand with feet hip-width apart, bar over mid-foot",
+        "Bend at hips and knees to grip the bar with hands just outside legs",
+        "Keep chest up and back neutral",
+        "Drive through heels and extend hips and knees simultaneously",
+        "Stand tall with shoulders back",
+        "Lower the bar back to the floor with control"
+      ]
+    },
+    {
+      "id": "bench_press",
+      "name": "Barbell Bench Press",
+      "description": "A compound exercise primarily targeting the chest, shoulders, and triceps",
+      "muscleGroups": ["chest", "shoulders", "triceps"],
+      "equipment": ["barbell", "bench"],
+      "category": "push",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Lie on bench with eyes under the bar",
+        "Grip the bar with hands slightly wider than shoulder-width",
+        "Unrack the bar and position it over your chest",
+        "Lower the bar to your chest with control",
+        "Press the bar back up to the starting position",
+        "Keep feet flat on the floor throughout the movement"
+      ]
+    },
+    {
+      "id": "overhead_press",
+      "name": "Barbell Overhead Press",
+      "description": "A compound exercise targeting the shoulders, triceps, and core",
+      "muscleGroups": ["shoulders", "triceps", "core"],
+      "equipment": ["barbell"],
+      "category": "push",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Stand with feet shoulder-width apart, bar at shoulder level",
+        "Grip the bar with hands just outside shoulder width",
+        "Press the bar straight up overhead",
+        "Lock out arms at the top",
+        "Lower the bar back to shoulder level with control"
+      ]
+    },
+    {
+      "id": "pullup",
+      "name": "Pull-up",
+      "description": "A bodyweight exercise targeting the back and biceps",
+      "muscleGroups": ["back", "biceps", "core"],
+      "equipment": ["pullup_bar"],
+      "category": "pull",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Hang from a pull-up bar with arms fully extended",
+        "Use an overhand grip slightly wider than shoulder width",
+        "Pull your body up until your chin is over the bar",
+        "Lower yourself back down with control",
+        "Avoid swinging or using momentum"
+      ]
+    },
+    {
+      "id": "dip",
+      "name": "Parallel Bar Dips",
+      "description": "A bodyweight exercise targeting the chest, shoulders, and triceps",
+      "muscleGroups": ["chest", "shoulders", "triceps"],
+      "equipment": ["dip_bars"],
+      "category": "push",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Support yourself on parallel bars with arms extended",
+        "Lower your body by bending your elbows",
+        "Descend until your shoulders are below your elbows",
+        "Push back up to the starting position",
+        "Keep your body upright throughout the movement"
+      ]
+    },
+    {
+      "id": "row_barbell",
+      "name": "Barbell Bent-Over Row",
+      "description": "A compound exercise targeting the back muscles",
+      "muscleGroups": ["back", "biceps", "rear_delts"],
+      "equipment": ["barbell"],
+      "category": "pull",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Stand with feet hip-width apart, holding a barbell",
+        "Hinge at the hips and lean forward about 45 degrees",
+        "Keep your back straight and core engaged",
+        "Pull the bar to your lower chest/upper abdomen",
+        "Squeeze your shoulder blades together at the top",
+        "Lower the bar back down with control"
+      ]
+    },
+    {
+      "id": "front_squat",
+      "name": "Barbell Front Squat",
+      "description": "A squat variation with the bar positioned on the front of the shoulders",
+      "muscleGroups": ["quads", "glutes", "core"],
+      "equipment": ["barbell", "squat_rack"],
+      "category": "legs",
+      "difficulty": "advanced",
+      "isCustom": false,
+      "instructions": [
+        "Position the bar on your front delts and collarbones",
+        "Keep elbows high and chest up",
+        "Stand with feet shoulder-width apart",
+        "Squat down while keeping your torso upright",
+        "Drive through heels to return to starting position"
+      ]
+    },
+    {
+      "id": "romanian_deadlift",
+      "name": "Romanian Deadlift",
+      "description": "A hip-hinge movement targeting the hamstrings and glutes",
+      "muscleGroups": ["hamstrings", "glutes", "back"],
+      "equipment": ["barbell"],
+      "category": "pull",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Hold a barbell with an overhand grip",
+        "Stand with feet hip-width apart",
+        "Hinge at the hips and push your hips back",
+        "Lower the bar while keeping it close to your legs",
+        "Feel a stretch in your hamstrings",
+        "Drive your hips forward to return to standing"
+      ]
+    },
+    {
+      "id": "incline_bench",
+      "name": "Incline Barbell Bench Press",
+      "description": "An incline variation targeting the upper chest",
+      "muscleGroups": ["chest", "shoulders", "triceps"],
+      "equipment": ["barbell", "incline_bench"],
+      "category": "push",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Set bench to 30-45 degree incline",
+        "Lie on bench with eyes under the bar",
+        "Grip bar slightly wider than shoulder-width",
+        "Lower bar to upper chest",
+        "Press bar back up to starting position"
+      ]
+    },
+    {
+      "id": "close_grip_bench",
+      "name": "Close-Grip Bench Press",
+      "description": "A bench press variation emphasizing the triceps",
+      "muscleGroups": ["triceps", "chest", "shoulders"],
+      "equipment": ["barbell", "bench"],
+      "category": "push",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Lie on bench and grip bar with hands closer than shoulder-width",
+        "Keep elbows close to your body",
+        "Lower bar to your chest",
+        "Press bar back up, focusing on tricep engagement"
+      ]
+    },
+    {
+      "id": "sumo_deadlift",
+      "name": "Sumo Deadlift",
+      "description": "A deadlift variation with a wide stance",
+      "muscleGroups": ["glutes", "quads", "hamstrings", "back"],
+      "equipment": ["barbell"],
+      "category": "pull",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Stand with feet wider than shoulder-width",
+        "Point toes out at 45-degree angles",
+        "Reach down and grip bar with hands inside your legs",
+        "Keep chest up and back straight",
+        "Drive through heels to stand up"
+      ]
+    },
+    {
+      "id": "bulgarian_split_squat",
+      "name": "Bulgarian Split Squat",
+      "description": "A single-leg squat variation",
+      "muscleGroups": ["quads", "glutes", "hamstrings"],
+      "equipment": ["bench", "bodyweight"],
+      "category": "legs",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Stand 2-3 feet in front of a bench",
+        "Place the top of one foot on the bench behind you",
+        "Lower your body until your front thigh is parallel to the floor",
+        "Push through your front heel to return to starting position",
+        "Complete all reps before switching legs"
+      ]
+    },
+    {
+      "id": "walking_lunge",
+      "name": "Walking Lunges",
+      "description": "A dynamic lunge variation",
+      "muscleGroups": ["quads", "glutes", "hamstrings", "calves"],
+      "equipment": ["bodyweight"],
+      "category": "legs",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Stand with feet hip-width apart",
+        "Step forward with one leg into a lunge position",
+        "Lower your body until both knees are at 90 degrees",
+        "Push off your back foot and step forward into the next lunge",
+        "Continue alternating legs as you walk forward"
+      ]
+    },
+    {
+      "id": "goblet_squat",
+      "name": "Goblet Squat",
+      "description": "A squat holding a dumbbell or kettlebell at chest level",
+      "muscleGroups": ["quads", "glutes", "core"],
+      "equipment": ["dumbbell"],
+      "category": "legs",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Hold a dumbbell vertically against your chest",
+        "Stand with feet slightly wider than shoulder-width",
+        "Squat down while keeping your chest up",
+        "Go as low as you can while maintaining good form",
+        "Drive through heels to return to standing"
+      ]
+    },
+    {
+      "id": "hip_thrust",
+      "name": "Barbell Hip Thrust",
+      "description": "A glute-focused exercise performed from a bench",
+      "muscleGroups": ["glutes", "hamstrings"],
+      "equipment": ["barbell", "bench"],
+      "category": "legs",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Sit with your back against a bench, barbell over your hips",
+        "Plant feet firmly on the ground",
+        "Drive through heels and thrust hips up",
+        "Squeeze glutes at the top",
+        "Lower hips back down with control"
+      ]
+    },
+    {
+      "id": "calf_raise",
+      "name": "Standing Calf Raises",
+      "description": "An isolation exercise for the calf muscles",
+      "muscleGroups": ["calves"],
+      "equipment": ["bodyweight"],
+      "category": "legs",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Stand with feet hip-width apart",
+        "Rise up onto your toes as high as possible",
+        "Hold the top position briefly",
+        "Lower back down slowly",
+        "Feel the stretch in your calves at the bottom"
+      ]
+    },
+    {
+      "id": "leg_press",
+      "name": "Leg Press",
+      "description": "A machine-based leg exercise",
+      "muscleGroups": ["quads", "glutes", "hamstrings"],
+      "equipment": ["leg_press_machine"],
+      "category": "legs",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Sit in the leg press machine",
+        "Place feet on the platform shoulder-width apart",
+        "Lower the weight until knees reach 90 degrees",
+        "Press through heels to extend legs",
+        "Don't lock knees completely at the top"
+      ]
+    },
+    {
+      "id": "dumbbell_press",
+      "name": "Dumbbell Bench Press",
+      "description": "A chest exercise using dumbbells",
+      "muscleGroups": ["chest", "shoulders", "triceps"],
+      "equipment": ["dumbbells", "bench"],
+      "category": "push",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Lie on bench holding dumbbells at chest level",
+        "Press dumbbells up and slightly together",
+        "Lower dumbbells to chest level with control",
+        "Feel a stretch in your chest at the bottom",
+        "Press back up to starting position"
+      ]
+    },
+    {
+      "id": "dumbbell_flyes",
+      "name": "Dumbbell Flyes",
+      "description": "An isolation exercise for the chest",
+      "muscleGroups": ["chest"],
+      "equipment": ["dumbbells", "bench"],
+      "category": "push",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Lie on bench holding dumbbells above chest",
+        "With slight bend in elbows, lower dumbbells out to sides",
+        "Feel a stretch across your chest",
+        "Bring dumbbells back together above chest",
+        "Maintain the same arm position throughout"
+      ]
+    },
+    {
+      "id": "pushup",
+      "name": "Push-ups",
+      "description": "A classic bodyweight chest exercise",
+      "muscleGroups": ["chest", "shoulders", "triceps", "core"],
+      "equipment": ["bodyweight"],
+      "category": "push",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Start in plank position with hands under shoulders",
+        "Lower your body until chest nearly touches the ground",
+        "Push back up to starting position",
+        "Keep your body in a straight line throughout",
+        "Don't let hips sag or pike up"
+      ]
+    },
+    {
+      "id": "tricep_dips",
+      "name": "Tricep Dips (Chair/Bench)",
+      "description": "A bodyweight tricep exercise using a chair or bench",
+      "muscleGroups": ["triceps", "shoulders"],
+      "equipment": ["bench"],
+      "category": "push",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Sit on edge of chair/bench, hands gripping the edge",
+        "Slide your butt off the edge, supporting weight with arms",
+        "Lower your body by bending elbows",
+        "Push back up to starting position",
+        "Keep legs straight for more difficulty"
+      ]
+    },
+    {
+      "id": "overhead_tricep_extension",
+      "name": "Overhead Tricep Extension",
+      "description": "An isolation exercise for the triceps",
+      "muscleGroups": ["triceps"],
+      "equipment": ["dumbbell"],
+      "category": "push",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Hold one dumbbell with both hands overhead",
+        "Lower the weight behind your head by bending elbows",
+        "Keep upper arms stationary",
+        "Extend elbows to return to starting position",
+        "Control the weight throughout the movement"
+      ]
+    },
+    {
+      "id": "lateral_raise",
+      "name": "Lateral Raises",
+      "description": "An isolation exercise for the side delts",
+      "muscleGroups": ["shoulders"],
+      "equipment": ["dumbbells"],
+      "category": "push",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Stand holding dumbbells at your sides",
+        "Raise arms out to sides until parallel to floor",
+        "Lead with your pinkies, not your thumbs",
+        "Lower back down with control",
+        "Don't use momentum to lift the weights"
+      ]
+    },
+    {
+      "id": "front_raise",
+      "name": "Front Raises",
+      "description": "An isolation exercise for the front delts",
+      "muscleGroups": ["shoulders"],
+      "equipment": ["dumbbells"],
+      "category": "push",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Stand holding dumbbells in front of thighs",
+        "Raise one arm forward to shoulder height",
+        "Lower back down with control",
+        "Alternate arms or do both together",
+        "Keep core engaged throughout"
+      ]
+    },
+    {
+      "id": "rear_delt_fly",
+      "name": "Rear Delt Flyes",
+      "description": "An isolation exercise for the rear delts",
+      "muscleGroups": ["rear_delts"],
+      "equipment": ["dumbbells"],
+      "category": "pull",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Bend forward at hips holding dumbbells",
+        "Raise arms out to sides, squeezing shoulder blades",
+        "Focus on pulling with your rear delts",
+        "Lower back down with control",
+        "Keep a slight bend in your elbows"
+      ]
+    },
+    {
+      "id": "chinup",
+      "name": "Chin-ups",
+      "description": "A bodyweight pulling exercise with underhand grip",
+      "muscleGroups": ["back", "biceps"],
+      "equipment": ["pullup_bar"],
+      "category": "pull",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Hang from pull-up bar with underhand grip",
+        "Pull yourself up until chin is over the bar",
+        "Focus on pulling with your back muscles",
+        "Lower yourself down with control",
+        "Keep core engaged throughout"
+      ]
+    },
+    {
+      "id": "lat_pulldown",
+      "name": "Lat Pulldown",
+      "description": "A machine exercise targeting the lats",
+      "muscleGroups": ["back", "biceps"],
+      "equipment": ["lat_pulldown_machine"],
+      "category": "pull",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Sit at lat pulldown machine with thighs secured",
+        "Grip the bar wider than shoulder-width",
+        "Pull bar down to upper chest",
+        "Squeeze shoulder blades together",
+        "Slowly return to starting position"
+      ]
+    },
+    {
+      "id": "seated_row",
+      "name": "Seated Cable Row",
+      "description": "A cable exercise for the back",
+      "muscleGroups": ["back", "biceps"],
+      "equipment": ["cable_machine"],
+      "category": "pull",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Sit at cable row machine with feet on platform",
+        "Grip handle with both hands",
+        "Pull handle to your abdomen",
+        "Squeeze shoulder blades together",
+        "Slowly return to starting position"
+      ]
+    },
+    {
+      "id": "tbar_row",
+      "name": "T-Bar Row",
+      "description": "A bent-over rowing variation",
+      "muscleGroups": ["back", "biceps"],
+      "equipment": ["tbar"],
+      "category": "pull",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Straddle the T-bar with feet hip-width apart",
+        "Bend at hips and grip the handles",
+        "Pull the bar to your chest",
+        "Squeeze shoulder blades together",
+        "Lower with control"
+      ]
+    },
+    {
+      "id": "dumbbell_row",
+      "name": "Single-Arm Dumbbell Row",
+      "description": "A unilateral back exercise",
+      "muscleGroups": ["back", "biceps"],
+      "equipment": ["dumbbell", "bench"],
+      "category": "pull",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Place one knee and hand on bench for support",
+        "Hold dumbbell in opposite hand",
+        "Pull dumbbell to your hip",
+        "Squeeze shoulder blade at the top",
+        "Lower with control"
+      ]
+    },
+    {
+      "id": "face_pull",
+      "name": "Face Pulls",
+      "description": "A cable exercise for rear delts and upper back",
+      "muscleGroups": ["rear_delts", "traps"],
+      "equipment": ["cable_machine"],
+      "category": "pull",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Set cable at face height with rope attachment",
+        "Pull rope toward your face",
+        "Separate hands at face level",
+        "Focus on squeezing shoulder blades",
+        "Return to starting position with control"
+      ]
+    },
+    {
+      "id": "shrug",
+      "name": "Barbell Shrugs",
+      "description": "An isolation exercise for the traps",
+      "muscleGroups": ["traps"],
+      "equipment": ["barbell"],
+      "category": "pull",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Hold barbell with arms extended",
+        "Shrug shoulders straight up",
+        "Hold briefly at the top",
+        "Lower shoulders back down",
+        "Don't roll shoulders forward or back"
+      ]
+    },
+    {
+      "id": "bicep_curl",
+      "name": "Barbell Bicep Curls",
+      "description": "A classic bicep isolation exercise",
+      "muscleGroups": ["biceps"],
+      "equipment": ["barbell"],
+      "category": "pull",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Stand holding barbell with underhand grip",
+        "Keep elbows at your sides",
+        "Curl bar up toward chest",
+        "Squeeze biceps at the top",
+        "Lower back down with control"
+      ]
+    },
+    {
+      "id": "hammer_curl",
+      "name": "Hammer Curls",
+      "description": "A bicep exercise with neutral grip",
+      "muscleGroups": ["biceps", "forearms"],
+      "equipment": ["dumbbells"],
+      "category": "pull",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Hold dumbbells with neutral grip (palms facing each other)",
+        "Keep elbows at your sides",
+        "Curl weights up toward shoulders",
+        "Lower back down with control",
+        "Don't swing or use momentum"
+      ]
+    },
+    {
+      "id": "preacher_curl",
+      "name": "Preacher Curls",
+      "description": "A bicep curl performed on a preacher bench",
+      "muscleGroups": ["biceps"],
+      "equipment": ["preacher_bench", "barbell"],
+      "category": "pull",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Sit at preacher bench with chest against pad",
+        "Hold barbell with underhand grip",
+        "Curl bar up, stopping just short of full extension",
+        "Lower back down with control",
+        "Don't let arms fully extend at bottom"
+      ]
+    },
+    {
+      "id": "plank",
+      "name": "Plank",
+      "description": "An isometric core exercise",
+      "muscleGroups": ["core", "shoulders"],
+      "equipment": ["bodyweight"],
+      "category": "core",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Start in push-up position",
+        "Lower to forearms, keeping body straight",
+        "Hold this position",
+        "Keep core tight and breathing steady",
+        "Don't let hips sag or pike up"
+      ]
+    },
+    {
+      "id": "crunches",
+      "name": "Crunches",
+      "description": "A basic abdominal exercise",
+      "muscleGroups": ["abs"],
+      "equipment": ["bodyweight"],
+      "category": "core",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Lie on back with knees bent",
+        "Place hands behind head or across chest",
+        "Lift shoulders off the ground",
+        "Focus on contracting abs",
+        "Lower back down with control"
+      ]
+    },
+    {
+      "id": "russian_twist",
+      "name": "Russian Twists",
+      "description": "A rotational core exercise",
+      "muscleGroups": ["abs", "obliques"],
+      "equipment": ["bodyweight"],
+      "category": "core",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Sit with knees bent, feet off ground",
+        "Lean back slightly, keeping back straight",
+        "Rotate torso left and right",
+        "Touch ground beside hips with hands",
+        "Keep feet elevated throughout"
+      ]
+    },
+    {
+      "id": "mountain_climber",
+      "name": "Mountain Climbers",
+      "description": "A dynamic core and cardio exercise",
+      "muscleGroups": ["core", "shoulders", "legs"],
+      "equipment": ["bodyweight"],
+      "category": "cardio",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Start in plank position",
+        "Bring one knee toward chest",
+        "Quickly switch legs",
+        "Continue alternating at a fast pace",
+        "Keep hips level throughout"
+      ]
+    },
+    {
+      "id": "burpee",
+      "name": "Burpees",
+      "description": "A full-body exercise combining squat, plank, and jump",
+      "muscleGroups": ["full_body"],
+      "equipment": ["bodyweight"],
+      "category": "cardio",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Start standing, then squat down",
+        "Place hands on ground and jump feet back to plank",
+        "Do a push-up (optional)",
+        "Jump feet back to squat position",
+        "Jump up with arms overhead"
+      ]
+    },
+    {
+      "id": "jumping_jack",
+      "name": "Jumping Jacks",
+      "description": "A classic cardio exercise",
+      "muscleGroups": ["full_body"],
+      "equipment": ["bodyweight"],
+      "category": "cardio",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Start with feet together, arms at sides",
+        "Jump feet apart while raising arms overhead",
+        "Jump back to starting position",
+        "Maintain a steady rhythm",
+        "Land softly on balls of feet"
+      ]
+    },
+    {
+      "id": "high_knee",
+      "name": "High Knees",
+      "description": "A running-in-place cardio exercise",
+      "muscleGroups": ["legs", "core"],
+      "equipment": ["bodyweight"],
+      "category": "cardio",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Stand with feet hip-width apart",
+        "Run in place, bringing knees toward chest",
+        "Pump arms as you would when running",
+        "Maintain a fast pace",
+        "Land on balls of feet"
+      ]
+    },
+    {
+      "id": "treadmill_run",
+      "name": "Treadmill Running",
+      "description": "Cardio exercise on a treadmill",
+      "muscleGroups": ["legs", "cardio"],
+      "equipment": ["treadmill"],
+      "category": "cardio",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Step onto treadmill and start at slow speed",
+        "Gradually increase to comfortable running pace",
+        "Maintain proper running form",
+        "Use handrails only for balance, not support",
+        "Gradually decrease speed to cool down"
+      ]
+    },
+    {
+      "id": "elliptical",
+      "name": "Elliptical Training",
+      "description": "Low-impact cardio exercise",
+      "muscleGroups": ["legs", "arms", "cardio"],
+      "equipment": ["elliptical"],
+      "category": "cardio",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Step onto elliptical and begin slow movement",
+        "Gradually increase resistance and speed",
+        "Use handles for upper body engagement",
+        "Maintain steady rhythm",
+        "Focus on smooth, controlled movements"
+      ]
+    },
+    {
+      "id": "battle_rope",
+      "name": "Battle Ropes",
+      "description": "High-intensity cardio using heavy ropes",
+      "muscleGroups": ["arms", "shoulders", "core", "cardio"],
+      "equipment": ["battle_ropes"],
+      "category": "cardio",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Hold one end of rope in each hand",
+        "Stand with feet shoulder-width apart",
+        "Create waves by moving arms up and down",
+        "Maintain high intensity for set duration",
+        "Keep core engaged throughout"
+      ]
+    },
+    {
+      "id": "box_jump",
+      "name": "Box Jumps",
+      "description": "Plyometric exercise jumping onto a box",
+      "muscleGroups": ["legs", "glutes", "calves"],
+      "equipment": ["box"],
+      "category": "cardio",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Stand facing a sturdy box or platform",
+        "Jump onto box, landing with both feet",
+        "Stand up fully on top of box",
+        "Step or jump back down",
+        "Reset and repeat"
+      ]
+    },
+    {
+      "id": "kettlebell_swing",
+      "name": "Kettlebell Swings",
+      "description": "A dynamic hip-hinge movement",
+      "muscleGroups": ["glutes", "hamstrings", "core", "shoulders"],
+      "equipment": ["kettlebell"],
+      "category": "cardio",
+      "difficulty": "intermediate",
+      "isCustom": false,
+      "instructions": [
+        "Stand with feet wider than shoulder-width",
+        "Hold kettlebell with both hands",
+        "Hinge at hips and swing kettlebell between legs",
+        "Drive hips forward to swing kettlebell to chest height",
+        "Let gravity bring kettlebell back down"
+      ]
+    },
+    {
+      "id": "farmer_walk",
+      "name": "Farmer's Walk",
+      "description": "A loaded carry exercise",
+      "muscleGroups": ["traps", "forearms", "core", "legs"],
+      "equipment": ["dumbbells"],
+      "category": "cardio",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Hold heavy dumbbells or weights at your sides",
+        "Stand tall with shoulders back",
+        "Walk forward with controlled steps",
+        "Keep core tight throughout",
+        "Maintain grip on weights"
+      ]
+    },
+    {
+      "id": "wall_sit",
+      "name": "Wall Sits",
+      "description": "An isometric leg exercise",
+      "muscleGroups": ["quads", "glutes"],
+      "equipment": ["wall"],
+      "category": "legs",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Stand with back against wall",
+        "Slide down until thighs are parallel to ground",
+        "Keep knees at 90-degree angle",
+        "Hold this position",
+        "Keep back flat against wall"
+      ]
+    },
+    {
+      "id": "step_up",
+      "name": "Step-ups",
+      "description": "A unilateral leg exercise using a box or bench",
+      "muscleGroups": ["quads", "glutes", "calves"],
+      "equipment": ["box"],
+      "category": "legs",
+      "difficulty": "beginner",
+      "isCustom": false,
+      "instructions": [
+        "Stand in front of box or bench",
+        "Step up with one foot onto the platform",
+        "Drive through heel to stand up completely",
+        "Step back down with control",
+        "Complete all reps before switching legs"
+      ]
+    }
+  ]
+} 
