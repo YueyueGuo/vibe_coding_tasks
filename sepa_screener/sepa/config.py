@@ -50,7 +50,7 @@ class FundamentalConfig:
     enabled: bool = True
     min_eps_growth: float = 0.25         # latest quarter EPS YoY growth
     min_revenue_growth: float = 0.20     # latest quarter sales YoY growth
-    workers: int = 8
+    workers: int = 4                     # parallel Yahoo requests (more triggers rate limits)
 
 
 @dataclass

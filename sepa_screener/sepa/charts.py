@@ -8,7 +8,8 @@ import pandas as pd
 from .vcp import VCPResult
 
 
-def plot_vcp(ticker: str, df: pd.DataFrame, v: VCPResult, path: Path, days: int = 200) -> Path:
+def plot_vcp(ticker: str, df: pd.DataFrame, v: VCPResult, path: Path, days: int = 200,
+             name: str | None = None) -> Path:
     import matplotlib
 
     matplotlib.use("Agg")
@@ -53,8 +54,11 @@ def plot_vcp(ticker: str, df: pd.DataFrame, v: VCPResult, path: Path, days: int 
     axv.set_xticklabels([d.index[i].strftime("%b %d") for i in ticks], fontsize=8)
     ax.tick_params(labelsize=8)
     ax.legend(loc="upper left", fontsize=7, frameon=False)
-    title = f"{ticker}  ·  {v.status.replace('_', ' ')}  ·  contractions {'/'.join(f'{x:.0f}' for x in v.depths_pct)}%"
-    ax.set_title(title, fontsize=10, loc="left")
+    fig.suptitle(f"{ticker}  {name}" if name else ticker, x=0.125, y=0.985, ha="left",
+                 fontsize=12, fontweight="bold")
+    sub = (f"{v.status.replace('_', ' ')}  ·  contractions {'/'.join(f'{x:.0f}' for x in v.depths_pct)}%"
+           f"  ·  pivot {v.pivot:.2f}" if v.pivot else v.status.replace("_", " "))
+    ax.set_title(sub, fontsize=9, loc="left", color="#555")
     for a in (ax, axv):
         a.grid(alpha=0.25, linewidth=0.5)
         for side in ("top", "right"):

@@ -12,7 +12,7 @@ from .data import download_history
 from .fundamentals import fetch_fundamentals
 from .market import breadth, index_health
 from .trend import TT_CRITERIA, passes_liquidity, rs_ratings, trend_template
-from .universe import load_universe
+from .universe import NAMES, load_universe
 from .vcp import VCPResult, detect_vcp
 
 log = logging.getLogger(__name__)
@@ -76,6 +76,9 @@ def run_screen(cfg: ScreenerConfig, cache_dir: Path | None = None) -> ScreenResu
             log.info("Fetching fundamentals for %d stocks", len(passers))
             fund = fetch_fundamentals(passers, cfg.fundamentals)
             vcp = vcp.merge(fund, on="ticker", how="left")
+        if "name" not in vcp.columns:
+            vcp["name"] = None
+        vcp["name"] = [n if isinstance(n, str) and n else NAMES.get(t) for t, n in zip(vcp["ticker"], vcp["name"])]
         vcp = vcp.sort_values(["actionable", "is_vcp", "score", "rs_rating"], ascending=False)
 
     return ScreenResult(

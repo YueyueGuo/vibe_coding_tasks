@@ -6,6 +6,8 @@ the number of Yahoo Finance requests small.
 from __future__ import annotations
 
 import logging
+import random
+import time
 from concurrent.futures import ThreadPoolExecutor
 
 import numpy as np
@@ -19,6 +21,24 @@ log = logging.getLogger(__name__)
 EPS_ROWS = ("Diluted EPS", "Basic EPS")
 REV_ROWS = ("Total Revenue", "Operating Revenue")
 NI_ROWS = ("Net Income", "Net Income Common Stockholders")
+
+
+def _retry(fn, tries: int = 4, base: float = 3.0):
+    """Yahoo rate-limits bursts of requests; back off and try again."""
+    for i in range(tries):
+        try:
+            return fn()
+        except Exception:
+            if i == tries - 1:
+                raise
+            time.sleep(base * 2 ** i + random.random() * base)
+
+
+def _quarterly(t):
+    q = t.quarterly_income_stmt
+    if q is None or q.empty:
+        raise ValueError("empty statement")
+    return q
 
 
 def _row(stmt: pd.DataFrame, names) -> pd.Series | None:
@@ -59,7 +79,7 @@ def fetch_one(ticker: str, cfg: FundamentalConfig) -> dict:
     out: dict = {"ticker": ticker}
     t = yf.Ticker(ticker)
     try:
-        q = t.quarterly_income_stmt
+        q = _retry(lambda: _quarterly(t))
         eps, rev, ni = _row(q, EPS_ROWS), _row(q, REV_ROWS), _row(q, NI_ROWS)
         g0, g1 = _yoy(eps, 0), _yoy(eps, 1)
         r0, r1 = _yoy(rev, 0), _yoy(rev, 1)
@@ -86,8 +106,8 @@ def fetch_one(ticker: str, cfg: FundamentalConfig) -> dict:
         log.debug("fundamentals %s: %s", ticker, exc)
         out["fund_pass"] = None
     try:
-        info = t.get_info() or {}
-        out["name"] = info.get("shortName") or info.get("longName")
+        info = _retry(t.get_info) or {}
+        out["name"] = info.get("longName") or info.get("shortName")
         out["sector"] = info.get("sector")
         out["industry"] = info.get("industry")
         mc = info.get("marketCap")

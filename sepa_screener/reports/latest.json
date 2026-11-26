@@ -1,5 +1,14 @@
 {
   "as_of": "2026-11-24",
+  "headline": "The market is in a correction, so the 27 VCP setups below are a watch list, not a buy list.",
+  "summary": [
+    "Market: SPY and QQQ are both below their 50-day and 200-day averages, with 9 distribution days each in the last 25 sessions. 32% of stocks are above their 50-day average, and new lows outnumber new highs 376 to 76.",
+    "Leadership: 370 stocks (16% of the liquid universe) pass the Trend Template. The most come from Healthcare (93), Technology (60) and Financial Services (50). Technology also has the most VCP setups (7).",
+    "Best setups: PAYX (Paychex) is 0.2% below its 115.30 pivot after contractions of 23/10/10/4%; BAX (Baxter International) is 1.3% above its 26.64 pivot after contractions of 25/9/6%; UVE (Universal Insurance Holdings) is 0.8% below its 49.44 pivot after contractions of 10/9/3%.",
+    "Breakouts: No stock broke out on volume today. BAX, PVH and RDWR are above the pivot on light volume, which is not yet a confirmed breakout.",
+    "Earnings growth: ARGX, SLDE, TRIN and KNTK also clear the SEPA earnings bar (EPS up 25%+ and sales up 20%+ year over year). These are the strongest candidates. Earnings data was missing for 1 of the 27 setups.",
+    "Report dates: PVH (Dec 3) and S (Dec 3) report within two weeks. Minervini avoids opening a position right before earnings."
+  ],
   "universe": 5403,
   "liquid": 2255,
   "trend_template": 370,

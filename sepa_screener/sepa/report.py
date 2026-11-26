@@ -5,12 +5,14 @@ import base64
 import html
 import json
 import logging
+import re
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 from .screen import ScreenResult
+from .summary import build_summary, plain
 
 log = logging.getLogger(__name__)
 
@@ -50,12 +52,15 @@ def split_sections(r: ScreenResult):
 
 
 # --------------------------------------------------------------------------- markdown
-def write_markdown(r: ScreenResult, path: Path) -> None:
+def write_markdown(r: ScreenResult, path: Path, summary: dict | None = None) -> None:
     actionable, watch, v = split_sections(r)
     lines = [f"# SEPA / VCP scan — {r.as_of:%Y-%m-%d}", ""]
     lines += [f"Universe **{r.universe_size:,}** symbols · **{r.downloaded:,}** with data · "
               f"**{r.liquid:,}** liquid · **{len(r.trend[r.trend['tt_pass']]) if len(r.trend) else 0}** pass the Trend Template · "
               f"**{len(actionable)}** actionable VCPs", ""]
+    if summary:
+        lines += ["## Summary", "", f"**{summary['headline']}**", ""]
+        lines += [f"- **{title}.** {text}" for title, text in summary["points"]] + [""]
     lines += ["## Market", "", "| Index | Close | 1d | Trend | >50d | >200d | Dist. days (25) |", "|---|---:|---:|---|:-:|:-:|---:|"]
     for m in r.market:
         lines.append(f"| {m['index']} | {m['close']:,.2f} | {m['chg_1d_pct']:+.2f}% | {m['trend']} | "
@@ -135,9 +140,15 @@ h2 .count{font-family:var(--f-mono);font-size:.85rem;color:var(--muted);font-wei
 .mono,td.num,.kv dd{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 section{display:flex;flex-direction:column;gap:14px}
 .note{color:var(--muted);font-size:.9rem;margin:0;max-width:70ch}
-.banner{border:1px solid var(--line);border-left:4px solid var(--warn);background:var(--warn-soft);padding:10px 14px;border-radius:6px}
-.banner.ok{border-left-color:var(--up);background:var(--up-soft)}
-.banner.bad{border-left-color:var(--down);background:var(--down-soft)}
+.summary{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:10px;
+  padding:18px 20px;gap:12px}
+.summary.ok{border-left-color:var(--up)} .summary.bad{border-left-color:var(--down)}
+.summary h2{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.verdict{font-family:var(--f-display);font-size:1.3rem;font-weight:700;line-height:1.35;margin:0;text-wrap:pretty;max-width:46em}
+.findings{margin:0;display:grid;grid-template-columns:max-content minmax(0,1fr);gap:10px 20px}
+.findings dt{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:.2rem}
+.findings dd{margin:0;max-width:75ch}
+@media (max-width:600px){.findings{grid-template-columns:1fr;gap:2px}.findings dd{margin-bottom:10px}}
 .market{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
 .idx{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .idx .name{font-weight:600}
@@ -190,6 +201,19 @@ def _e(x) -> str:
     return html.escape("–" if x is None or (isinstance(x, float) and np.isnan(x)) else str(x))
 
 
+def _bold(text: str) -> str:
+    return re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", html.escape(text))
+
+
+def _summary_html(r: ScreenResult, summary: dict) -> str:
+    trends = [m["trend"] for m in r.market[:2]]
+    tone = ("ok" if trends and all(t.startswith("Confirmed") for t in trends)
+            else "bad" if any(t.startswith("Correction") for t in trends) else "warn")
+    items = "".join(f"<dt>{_e(t)}</dt><dd>{_bold(x)}</dd>" for t, x in summary["points"])
+    return (f'<section class="summary {tone}" aria-labelledby="summary-h"><h2 id="summary-h">Summary</h2>'
+            f'<p class="verdict">{_e(summary["headline"])}</p><dl class="findings">{items}</dl></section>')
+
+
 def _trend_class(t: str) -> str:
     return "trend-up" if t.startswith("Confirmed") else "trend-mid" if "pressure" in t else "trend-down"
 
@@ -207,14 +231,6 @@ def _market_html(r: ScreenResult) -> str:
             f'{chk(m["above_200sma"], "200d")}{chk(m["sma50_above_200"], "50>200")}'
             f'<span class="chk{" y" if m["distribution_days_25"] <= 4 else ""}">{m["distribution_days_25"]} dist. days</span></div></div>'
         )
-    trends = [m["trend"] for m in r.market]
-    if trends and all(t.startswith("Confirmed") for t in trends[:2]):
-        banner = '<div class="banner ok">The market is in a confirmed uptrend. Breakouts have the wind at their back.</div>'
-    elif any(t.startswith("Correction") for t in trends[:2]):
-        banner = ('<div class="banner bad">The major indexes are in a correction. Minervini cuts new buying and position size '
-                  'until the market turns. Use this list to build a watch list.</div>')
-    else:
-        banner = '<div class="banner">The uptrend is under pressure. Be selective and keep positions small.</div>'
     b = r.breadth
     breadth = ""
     if b:
@@ -222,7 +238,7 @@ def _market_html(r: ScreenResult) -> str:
                    f'<span>Above 200-day <b>{b["pct_above_200sma"]}%</b></span>'
                    f'<span>New 52-week highs <b>{b["new_52w_highs"]}</b></span>'
                    f'<span>New 52-week lows <b>{b["new_52w_lows"]}</b></span></div>')
-    return f'{banner}<div class="market">{"".join(cards)}</div>{breadth}'
+    return f'<div class="market">{"".join(cards)}</div>{breadth}'
 
 
 def _card(row, chart_png: Path | None, as_of) -> str:
@@ -265,7 +281,7 @@ def _table(df: pd.DataFrame, cols: list[tuple[str, str, callable]]) -> str:
     return f'<div class="tbl"><table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>'
 
 
-def write_html(r: ScreenResult, path: Path, charts: dict[str, Path]) -> None:
+def write_html(r: ScreenResult, path: Path, charts: dict[str, Path], summary: dict | None = None) -> None:
     actionable, watch, v = split_sections(r)
     n_tt = int(r.trend["tt_pass"].sum()) if len(r.trend) else 0
     pill = lambda x: f'<span class="pill {x["status"]}">{_e(STATUS_LABEL.get(x["status"], x["status"]))}</span>'  # noqa: E731
@@ -297,6 +313,7 @@ def write_html(r: ScreenResult, path: Path, charts: dict[str, Path]) -> None:
   <p class="sub">Trend Template, relative strength and Volatility Contraction Patterns across {r.universe_size:,} US-listed stocks.
   {r.liquid:,} were liquid enough to screen; <b>{n_tt}</b> passed the Trend Template and <b>{len(actionable)}</b> show an actionable VCP.</p>
 </header>
+{_summary_html(r, summary) if summary else ""}
 <section><h2>Market</h2>{_market_html(r)}</section>
 <section><h2>Actionable VCP setups <span class="count">{len(actionable)}</span></h2>
 <p class="note">Each stock passes the Trend Template, its contractions get progressively tighter with lower volume, and it sits
@@ -326,26 +343,32 @@ def write_reports(r: ScreenResult, out_dir: Path, charts: bool = True, max_chart
 
     chart_paths: dict[str, Path] = {}
     actionable, _, _ = split_sections(r)
+    summary = build_summary(r, actionable, out_dir)
     if charts and not actionable.empty:
         try:
             from .charts import plot_vcp
             chart_dir = out_dir / "_charts"
+            names = dict(zip(actionable["ticker"], actionable["name"])) if "name" in actionable.columns else {}
             for t in actionable["ticker"].head(max_charts):
-                chart_paths[t] = plot_vcp(t, r.prices[t], r.vcp_details[t], chart_dir / f"{t}.png")
+                name = names.get(t)
+                chart_paths[t] = plot_vcp(t, r.prices[t], r.vcp_details[t], chart_dir / f"{t}.png",
+                                          name=name if isinstance(name, str) else None)
         except ImportError:
             log.warning("matplotlib not installed: skipping charts")
 
     md = day_dir / "report.md"
-    write_markdown(r, md)
+    write_markdown(r, md, summary)
     html_path = out_dir / "latest.html"
-    write_html(r, html_path, chart_paths)
+    write_html(r, html_path, chart_paths, summary)
     (out_dir / "latest.md").write_text(md.read_text())
-    summary = {
+    latest = {
         "as_of": f"{r.as_of:%Y-%m-%d}",
+        "headline": summary["headline"],
+        "summary": [f"{t}: {plain(x)}" for t, x in summary["points"]],
         "universe": r.universe_size, "liquid": r.liquid,
         "trend_template": int(r.trend["tt_pass"].sum()) if len(r.trend) else 0,
         "actionable": actionable["ticker"].tolist() if not actionable.empty else [],
         "market": [{k: m[k] for k in ("index", "trend", "distribution_days_25")} for m in r.market],
     }
-    (out_dir / "latest.json").write_text(json.dumps(summary, indent=2))
+    (out_dir / "latest.json").write_text(json.dumps(latest, indent=2))
     return {"markdown": md, "html": html_path, "dir": day_dir}

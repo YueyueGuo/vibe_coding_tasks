@@ -66,11 +66,21 @@ Each run writes to `reports/`:
 
 | File | Contents |
 |---|---|
-| `YYYY-MM-DD/report.md` | Market, actionable VCPs, watch list (with why each misses), every Trend Template stock |
+| `YYYY-MM-DD/report.md` | Summary of the findings, market, actionable VCPs, watch list (with why each misses), every Trend Template stock |
 | `YYYY-MM-DD/vcp_candidates.csv` | Every Trend Template stock with its VCP analysis and fundamentals |
 | `YYYY-MM-DD/trend_template.csv` | Every liquid stock with each of the 8 criteria |
-| `latest.md`, `latest.json` | The most recent run |
-| `latest.html` | A self-contained page with charts of each setup (not committed: regenerated each run) |
+| `latest.md`, `latest.json` | The most recent run (`latest.json` holds the summary headline and findings) |
+| `latest.html` | A self-contained page: the summary up top, then a chart of each setup labelled with ticker and company name (not committed: regenerated each run) |
+
+The summary (`sepa/summary.py`) is written fresh each run from the results:
+- **Verdict:** a one-line call based on the market's trend.
+- **Market:** index position and distribution days.
+- **Leadership:** Trend Template count and leading sectors.
+- **Best setups:** the top three, with their pivots.
+- **Breakouts:** stocks that broke out on volume today.
+- **Earnings growth:** which setups clear the SEPA earnings bar.
+- **Report dates:** setups with earnings due within two weeks.
+- **Since the last scan:** setups added or dropped since the previous run.
 
 ## Run it
 

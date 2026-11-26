@@ -104,3 +104,25 @@ def test_rs_rating_ranks_leaders_high():
     rs = rs_ratings(prices)
     assert rs["S19"] == 99 and rs["S0"] <= 10
     assert np.isnan(rs_raw_score(prices["S1"]["Close"].tail(100)))
+
+
+def test_summary_headline_and_names():
+    from types import SimpleNamespace
+
+    from sepa.summary import build_summary, short_name
+
+    assert short_name("Paychex, Inc.") == "Paychex"
+    assert short_name("UNIVERSAL INSURANCE HOLDINGS") == "Universal Insurance Holdings"
+    mkt = {"above_50sma": False, "above_200sma": False, "distribution_days_25": 8, "trend": "Correction / downtrend"}
+    act = pd.DataFrame([{"ticker": "AAA", "name": "Alpha Corp.", "status": "breakout", "pivot": 10.0,
+                         "dist_to_pivot_pct": 1.0, "depths_pct": "20/9/4", "score": 80, "breakout_volume_ratio": 2.0,
+                         "fund_pass": True, "sector": "Technology", "next_earnings": None}])
+    r = SimpleNamespace(vcp=act, trend=pd.DataFrame({"tt_pass": [True, False]}), liquid=2,
+                        market=[{**mkt, "index": "SPY (S&P 500)"}, {**mkt, "index": "QQQ (Nasdaq 100)"}],
+                        breadth={}, as_of=pd.Timestamp("2026-11-24"))
+    s = build_summary(r, act)
+    assert "correction" in s["headline"] and "watch list" in s["headline"]
+    text = dict(s["points"])
+    assert "**AAA** (Alpha)" in text["Best setups"]
+    assert "Broke out today" in text["Breakouts"]
+    assert "strongest candidate" in text["Earnings growth"]

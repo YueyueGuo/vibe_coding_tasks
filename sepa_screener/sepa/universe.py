@@ -28,6 +28,20 @@ _EXCLUDE_NAME = re.compile(
 )
 
 
+# Company names seen while loading the universe (fallback when Yahoo has none).
+NAMES: dict[str, str] = {}
+
+_NAME_SUFFIX = re.compile(
+    r"\s*-?\s*(?:Class [A-Z] )?(?:Common Stock|Ordinary Shares?|Common Shares?|American Depositary Shares?.*|"
+    r"Depositary Shares?.*|Shares of Beneficial Interest|Capital Stock)\b.*$",
+    re.IGNORECASE,
+)
+
+
+def clean_name(name: str) -> str:
+    return _NAME_SUFFIX.sub("", str(name)).strip(" -,")
+
+
 def _yahoo_symbol(sym: str) -> str:
     return sym.strip().replace(".", "-").replace("/", "-")
 
@@ -53,6 +67,8 @@ def us_listed() -> list[str]:
     df = df[~df["Security Name"].str.contains(_EXCLUDE_NAME)]
     df = df[~df["sym"].str.contains(r"[\$\^ ]")]          # preferreds / odd classes
     df = df[df["sym"].str.len() <= 5]
+    for sym, name in zip(df["sym"], df["Security Name"]):
+        NAMES.setdefault(_yahoo_symbol(sym), clean_name(name))
     syms = sorted({_yahoo_symbol(s) for s in df["sym"] if s})
     log.info("US-listed universe: %d symbols", len(syms))
     return syms
@@ -64,7 +80,13 @@ def _wiki_index(key: str) -> list[str]:
     for table in pd.read_html(io.StringIO(r.text)):
         for col in ("Symbol", "Ticker symbol", "Ticker"):
             if col in table.columns:
-                return [_yahoo_symbol(str(s)) for s in table[col].dropna()]
+                syms = [_yahoo_symbol(str(s)) for s in table[col].dropna()]
+                for name_col in ("Security", "Company"):
+                    if name_col in table.columns:
+                        for sym, name in zip(syms, table[name_col]):
+                            NAMES.setdefault(sym, clean_name(name))
+                        break
+                return syms
     raise RuntimeError(f"Could not find a symbol column on {WIKI[key]}")
 
 
