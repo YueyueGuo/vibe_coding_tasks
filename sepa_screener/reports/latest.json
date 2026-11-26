@@ -1,0 +1,52 @@
+{
+  "as_of": "2026-11-24",
+  "universe": 5403,
+  "liquid": 2255,
+  "trend_template": 370,
+  "actionable": [
+    "PAYX",
+    "BAX",
+    "UVE",
+    "BOW",
+    "RNR",
+    "AVPT",
+    "CART",
+    "ARGX",
+    "KFRC",
+    "SLDE",
+    "PVH",
+    "INCY",
+    "AXTA",
+    "CNI",
+    "RDWR",
+    "GEN",
+    "CUZ",
+    "TRIN",
+    "LNG",
+    "KNTK",
+    "ICUI",
+    "TDC",
+    "BUD",
+    "HIW",
+    "PAYC",
+    "S",
+    "VAC"
+  ],
+  "market": [
+    {
+      "index": "SPY (S&P 500)",
+      "trend": "Correction / downtrend",
+      "distribution_days_25": 9
+    },
+    {
+      "index": "QQQ (Nasdaq 100)",
+      "trend": "Correction / downtrend",
+      "distribution_days_25": 9
+    },
+    {
+      "index": "IWM (Russell 2000)",
+      "trend": "Correction / downtrend",
+      "distribution_days_25": 7
+    }
+  ]
+}

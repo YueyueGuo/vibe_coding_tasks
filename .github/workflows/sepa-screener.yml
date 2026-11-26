@@ -1,0 +1,64 @@
+name: SEPA / VCP screener
+
+on:
+  schedule:
+    # 22:17 UTC on weekdays = 5:17 pm ET in winter / 6:17 pm ET in summer, after the US close.
+    - cron: "17 22 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      universe:
+        description: "us | sp500 | sp1500 | comma-separated tickers"
+        default: "us"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sepa-screener
+  cancel-in-progress: false
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: sepa_screener
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: sepa_screener/requirements.txt
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Test
+        run: python -m pytest -q tests
+
+      - name: Run screen
+        env:
+          UNIVERSE: ${{ inputs.universe || 'us' }}
+        run: python run_screener.py --universe "$UNIVERSE"
+
+      - name: Job summary
+        run: cat reports/latest.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: sepa-report
+          path: sepa_screener/reports/latest.html
+          retention-days: 30
+
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "SEPA scan $(python -c 'import json;print(json.load(open("reports/latest.json"))["as_of"])')"
+          git push

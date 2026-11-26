@@ -1,0 +1,6 @@
+.cache/
+__pycache__/
+.pytest_cache/
+# Large, regenerated every run (charts are embedded in latest.html)
+reports/_charts/
+reports/latest.html
